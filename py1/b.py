@@ -27,6 +27,13 @@ class Category:
     
     def check_funds(self, amount):
         return amount <= self.balance
+    
+    def __str__(self):
+        answer = f"{self.name:*^30}\n"
+        for entry in self.ledger:
+            answer += f"{entry['description'][:23]:<23}{entry['amount']:>7.2f}\n"
+        answer += f"Total: {self.balance:.2f}"
+        return answer
 
 def create_spend_chart(categories):
     pass
