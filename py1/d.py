@@ -8,15 +8,16 @@ class HashTable:
     def add(self, key, value):
         hashed_key = self.hash(key)
         if hashed_key in self.collection:
-            self.collection[hashed_key].append((key, value))
+            self.collection[hashed_key][key] = value
         else:
-            self.collection[hashed_key] = [(key, value)]
+            self.collection[hashed_key] = {key: value}
             
     def remove(self, key):
         hashed_key = self.hash(key)
         if hashed_key in self.collection:
             if len(self.collection[hashed_key]) > 1:
-                self.collection[hashed_key].pop()
+                if key in self.collection[hashed_key]:
+                    del self.collection[hashed_key][key]
             else:
                 del self.collection[hashed_key]
                 
@@ -24,8 +25,7 @@ class HashTable:
         hashed_key = self.hash(key)
         pair = self.collection.get(hashed_key, None)
         if pair:
-            k, v = pair[-1]
-            return v
+            return pair.get(key, None)
         return None
     
 if __name__ == "__main__":
