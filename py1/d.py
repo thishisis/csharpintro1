@@ -14,12 +14,17 @@ class HashTable:
             
     def remove(self, key):
         hashed_key = self.hash(key)
-        if hashed_key in self.collection:
+        #print(self.collection)
+        #print("key", key)
+        #print("hashed_key", hashed_key)
+        if self.collection.get(hashed_key) is not None:
             if len(self.collection[hashed_key]) > 1:
-                if key in self.collection[hashed_key]:
+                if self.collection[hashed_key].get(key) is not None:
                     del self.collection[hashed_key][key]
             else:
-                del self.collection[hashed_key]
+                if self.collection[hashed_key].get(key) is not None:
+                    del self.collection[hashed_key]
+        #print("after removal", self.collection)
                 
     def lookup(self, key):
         hashed_key = self.hash(key)
@@ -28,7 +33,7 @@ class HashTable:
             return pair.get(key, None)
         return None
     
-if __name__ == "__main__":
+if __name__ == "__main__" and False:
     ht = HashTable()
     ht.add("apple", 1)
     ht.add("banana", 2)
