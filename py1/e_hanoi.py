@@ -24,3 +24,4 @@ if __name__ == "__main__":
     solution = hanoi_solver(num_disks)
     print (f"Solution for {num_disks} disks:")
     print(solution)
+    
